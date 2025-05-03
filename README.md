@@ -28,3 +28,16 @@
 
 - 🛠️ **C# 기반 개발**  
   Unity 엔진을 활용한 C# 프로젝트입니다.
+
+---
+
+## 📦 사용한 에셋
+
+- [Kings and Pigs by Pixel Frog](https://pixelfrog-assets.itch.io/kings-and-pigs)  
+  (게임 내 그래픽 및 스프라이트)
+
+- [m6x11 Bitmap Font by managore](https://managore.itch.io/m6x11)  
+  (픽셀 폰트)
+
+- [DOTween Pro (Unity Asset Store)](https://assetstore.unity.com/packages/tools/visual-scripting/dotween-pro-32416?locale=ko-KR)  
+  (애니메이션 및 트윈 효과)
