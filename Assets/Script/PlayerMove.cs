@@ -4,21 +4,31 @@ using UnityEngine.InputSystem;
 public class PlayerMove : MonoBehaviour
 {
     Rigidbody2D rb;
+    public GameObject spwnPoint; // 스폰 포인트
     public float speed = 5f; 
     public float jumpForce = 5f; 
     Animator animator; 
     Vector2 move;
-    private bool jumpCheck = true; // Flag to check if the player can jump
+    [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private Transform groundCheck;
+    [SerializeField] private float groundRadius = 0.2f;
+    private bool isGrounded;
 
     
     void Start()
     {
+        transform.position = spwnPoint.transform.position; // Set the player's position to the spawn point
         rb = GetComponent<Rigidbody2D>(); // Get the Rigidbody2D component attached to the player
         animator = GetComponent<Animator>(); // Get the Animator component attached to the player
     }
 
     void Update()
     {
+        isGrounded = Physics2D.OverlapCircle(
+            groundCheck.position, 
+            groundRadius, 
+            groundLayer
+        );
         rb.linearVelocity = new Vector2(move.x * speed, rb.linearVelocity.y);
         animator.SetFloat("run", Mathf.Abs(move.x));
         CheckLR();
@@ -31,7 +41,7 @@ public class PlayerMove : MonoBehaviour
 
     void OnJump(InputValue value)
     {
-        if(jumpCheck){
+        if(isGrounded){
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
             animator.SetBool("jump",true);
         }
@@ -53,16 +63,7 @@ public class PlayerMove : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground")) // 지면에 닿았을 때
         {
-            jumpCheck = true; // 지면에 닿았다고 설정
             animator.SetBool("jump", false);
-        }
-    }
-
-    void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Ground")) // 지면에 닿았을 때
-        {
-            jumpCheck = false; // 지면과 멀어졌을떄떄
         }
     }
 }
