@@ -29,6 +29,7 @@ public class PlayerMove : MonoBehaviour
             groundRadius, 
             groundLayer
         );
+        animator.SetBool("jump",!isGrounded); // Set the jump animation based on whether the player is grounded
         rb.linearVelocity = new Vector2(move.x * speed, rb.linearVelocity.y);
         animator.SetFloat("run", Mathf.Abs(move.x));
         CheckLR();
@@ -59,11 +60,11 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Ground")) // 지면에 닿았을 때
-        {
-            animator.SetBool("jump", false);
-        }
-    }
+    // void OnCollisionEnter2D(Collision2D collision)
+    // {
+    //     if (collision.gameObject.CompareTag("Ground")) // 지면에 닿았을 때
+    //     {
+    //         animator.SetBool("jump", false);
+    //     }
+    // }
 }
