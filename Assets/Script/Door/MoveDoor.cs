@@ -21,6 +21,9 @@ public class MoveDoor : MonoBehaviour
     public GameObject nextMap;                // 다음 맵 오브젝트
     public Transform nextDoorExitPoint;       // 다음 맵 문의 출구 위치
 
+    [Header("카메라 위치")]
+    public Transform cameraPosition;          // 카메라 위치
+
     // 상태 변수
     private bool isPlayerInTrigger = false;   // 플레이어가 트리거 영역 안에 있는지 여부
     private bool isProcessing = false;        // 맵 이동 처리 중인지 여부
@@ -128,7 +131,7 @@ public class MoveDoor : MonoBehaviour
         CinemachineCamera vCam = Object.FindFirstObjectByType<CinemachineCamera>();
         if (vCam != null)
         {
-            vCam.transform.position = new Vector3(42f, 0.64f, -10f);
+            vCam.transform.position = cameraPosition.position; // 카메라 위치 조정
         }
         else
         {
