@@ -17,7 +17,8 @@ public class HeartUI : MonoBehaviour
         maxHealth = gameManager.MaxHeart;
     }
 
-    void Update() {
+    void FixedUpdate() {
+        health = gameManager.Heart;
         UpdateHeartImages();
     }
 

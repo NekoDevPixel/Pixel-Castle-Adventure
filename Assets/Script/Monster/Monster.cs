@@ -8,18 +8,20 @@ public class Monster : MonoBehaviour
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
     private bool playerInRange = false;
+    private Animator animator;
     
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
         
         if (player == null)
             player = GameObject.FindGameObjectWithTag("Player").transform;
             
         // 감지용 콜라이더 추가 (코드로 추가하거나 Unity 에디터에서 추가)
         CircleCollider2D detectionCollider = gameObject.AddComponent<CircleCollider2D>();
-        detectionCollider.radius = 5f;
+        detectionCollider.radius = 3.5f;
         detectionCollider.isTrigger = true;
     }
     
@@ -33,9 +35,9 @@ public class Monster : MonoBehaviour
             
             // 스프라이트 플립 (왼쪽/오른쪽 방향)
             if (directionSign > 0)
-                spriteRenderer.flipX = false;
-            else if (directionSign < 0)
                 spriteRenderer.flipX = true;
+            else if (directionSign < 0)
+                spriteRenderer.flipX = false;
             
             // X축으로만 이동 (Y축 이동은 0으로 설정)
             rb.linearVelocity = new Vector2(directionSign * moveSpeed, 0f);
@@ -44,6 +46,7 @@ public class Monster : MonoBehaviour
         {
             rb.linearVelocity = Vector2.zero; // 플레이어가 범위 내에 없으면 정지
         }
+        animator.SetFloat("run", Mathf.Abs(rb.linearVelocity.magnitude)); // 애니메이션 속도 설정
     }
     
     // 플레이어 감지
@@ -52,6 +55,7 @@ public class Monster : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInRange = true;
+            
         }
     }
     
@@ -61,6 +65,7 @@ public class Monster : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInRange = false;
+            
         }
     }
 }

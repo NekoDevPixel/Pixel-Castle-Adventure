@@ -13,7 +13,6 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private float groundRadius = 0.2f;
     private bool isGrounded;
-
     
     void Start()
     {
