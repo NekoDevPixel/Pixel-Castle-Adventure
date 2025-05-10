@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -9,6 +10,8 @@ public class Monster : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private bool playerInRange = false;
     private Animator animator;
+    
+    private bool isStunned = false;
     
     void Start()
     {
@@ -27,6 +30,13 @@ public class Monster : MonoBehaviour
     
     void Update()
     {
+        if (isStunned)
+        {
+            rb.linearVelocity = Vector2.zero;
+            animator.SetFloat("run", 0f); // 멈추는 애니메이션 처리
+            return;
+        }
+
         if (playerInRange)
         {
             // 플레이어의 X 위치만 추적 (Y는 무시)
@@ -67,5 +77,22 @@ public class Monster : MonoBehaviour
             playerInRange = false;
             
         }
+    }
+
+    public void Stun(float duration)
+    {
+        StartCoroutine(StunCoroutine(duration));
+    }
+
+    private IEnumerator StunCoroutine(float duration)
+    {
+        isStunned = true;
+        yield return new WaitForSeconds(duration);
+        isStunned = false;
+    }
+
+    public bool IsStunned()
+    {
+        return isStunned;
     }
 }
