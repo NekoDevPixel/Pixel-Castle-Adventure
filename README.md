@@ -41,3 +41,7 @@
 
 - [DOTween Pro (Unity Asset Store)](https://assetstore.unity.com/packages/tools/visual-scripting/dotween-pro-32416?locale=ko-KR)  
   (애니메이션 및 트윈 효과)
+
+## 🎬 게임플레이 미리보기
+
+![Diamond Run Gameplay](./explay/Ex_play.gif)
