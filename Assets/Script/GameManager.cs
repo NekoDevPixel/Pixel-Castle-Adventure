@@ -14,10 +14,10 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         EHeart();
-        if (Heart <= 0)
-        {
-            GameOver();
-        }
+        // if (Heart <= 0)
+        // {
+        //     GameOver();
+        // }
     }
 
     void EHeart()
@@ -43,12 +43,12 @@ public class GameManager : MonoBehaviour
     //     }
     // }
 
-    void GameOver()
-    {
-        Debug.Log("게임 오버!");
-        // 게임 오버 화면으로 전환하거나 다시 시작 가능
-        // SceneManager.LoadScene("GameOverScene");
-        Time.timeScale = 0f;
-    }
+    // void GameOver()
+    // {
+    //     Debug.Log("게임 오버!");
+    //     // 게임 오버 화면으로 전환하거나 다시 시작 가능
+    //     // SceneManager.LoadScene("GameOverScene");
+    //     Time.timeScale = 0f;
+    // }
 
 }

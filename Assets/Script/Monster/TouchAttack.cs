@@ -51,7 +51,7 @@ public class TouchAttack : MonoBehaviour
         playeranim.SetTrigger("hit");
         gameManager.Heart -= 1; // 플레이어의 체력 감소
         yield return new WaitForSeconds(playeranim.GetCurrentAnimatorStateInfo(0).length);
-        playeranim.SetTrigger("idle");
+        playeranim.SetTrigger("Idle");
     }
     
 }
