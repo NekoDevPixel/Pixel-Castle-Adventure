@@ -7,25 +7,32 @@ public class TouchAttack : MonoBehaviour
     public float knockbackDuration = 1f;
     private GameManager gameManager;
     public Animator playeranim;
+    private Monster monster;
+    public Rigidbody2D playerRb;
+
+    private bool isattack = false;
 
     void Awake()
     {
         gameManager = FindFirstObjectByType<GameManager>();
+        monster = GetComponent<Monster>();
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    void FixedUpdate()
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (isattack == true)
         {
-            
+            touchAttack();
+            isattack = false;
+        }
+    }
 
-            Monster monster = GetComponent<Monster>();
-            if (monster != null && monster.IsStunned())
+    void touchAttack()
+    {
+        if (monster != null && monster.IsStunned())
             {
                 return;
             }
-
-            Rigidbody2D playerRb = collision.gameObject.GetComponent<Rigidbody2D>();
             if (playerRb != null)
             {
                 
@@ -43,6 +50,13 @@ public class TouchAttack : MonoBehaviour
             {
                 monster.Stun(knockbackDuration);
             }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            isattack = true;   
         }
     }  
 

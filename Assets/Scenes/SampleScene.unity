@@ -42125,6 +42125,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 301711498}
     - target: {fileID: 7413719772127205278, guid: 21b1676b625eeda4ea180234a59c87fc, type: 3}
+      propertyPath: playerRb
+      value: 
+      objectReference: {fileID: 301711501}
+    - target: {fileID: 7413719772127205278, guid: 21b1676b625eeda4ea180234a59c87fc, type: 3}
       propertyPath: playeranim
       value: 
       objectReference: {fileID: 301711496}
