@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4353806438976084675}
   - component: {fileID: 1074284424790547451}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: transparent footboard
   m_TagString: Ground
   m_Icon: {fileID: 0}
