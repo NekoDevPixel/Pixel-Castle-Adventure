@@ -13,9 +13,14 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private float groundRadius = 0.2f;
     private bool isGrounded;
+
+    [Header("Player Sound")]
+    AudioSource audioSource;
+    public AudioClip runsound;
     
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         transform.position = spwnPoint.transform.position; // Set the player's position to the spawn point
         rb = GetComponent<Rigidbody2D>(); // Get the Rigidbody2D component attached to the player
         animator = GetComponent<Animator>(); // Get the Animator component attached to the player
@@ -31,6 +36,7 @@ public class PlayerMove : MonoBehaviour
         animator.SetBool("jump",!isGrounded); // Set the jump animation based on whether the player is grounded
         rb.linearVelocity = new Vector2(move.x * speed, rb.linearVelocity.y);
         animator.SetFloat("run", Mathf.Abs(move.x));
+        RunSound();
         CheckLR();
     }
 
@@ -66,4 +72,15 @@ public class PlayerMove : MonoBehaviour
     //         animator.SetBool("jump", false);
     //     }
     // }
+
+    void RunSound()
+    {
+        if (Mathf.Abs(move.x) > 0.01f && isGrounded)
+        {
+            audioSource.PlayOneShot(runsound);
+        }
+        else{
+            audioSource.Stop();
+        }
+    }
 }

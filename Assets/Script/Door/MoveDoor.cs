@@ -24,6 +24,9 @@ public class MoveDoor : MonoBehaviour
     [Header("카메라 위치")]
     public Transform cameraPosition;          // 카메라 위치
 
+    [Header("사운드 설정")]
+    private DoorSound doorSound;             // 문 소리 재생 스크립트
+
     // 상태 변수
     private bool isPlayerInTrigger = false;   // 플레이어가 트리거 영역 안에 있는지 여부
     private bool isProcessing = false;        // 맵 이동 처리 중인지 여부
@@ -36,7 +39,7 @@ public class MoveDoor : MonoBehaviour
         // 상태 초기화
         isPlayerInTrigger = false;
         isProcessing = false;
-        
+        doorSound = GetComponent<DoorSound>();
         // 현재 문의 애니메이터 컴포넌트 가져오기
         doorAnimator = GetComponent<Animator>();
     }
@@ -73,6 +76,7 @@ public class MoveDoor : MonoBehaviour
 
         // ===== 1단계: 현재 맵의 문 열기 및 플레이어 진입 =====
         doorAnimator.SetTrigger("Open");
+        doorSound.OpenDoor();  // 문 열기 소리 재생
         yield return new WaitForSeconds(0.5f);  // 문이 절반 정도 열릴 때까지 대기
 
         // 플레이어 문 진입 애니메이션 재생
@@ -84,6 +88,7 @@ public class MoveDoor : MonoBehaviour
         
         // 현재 맵의 문 닫기
         doorAnimator.SetTrigger("lockdoor");
+        doorSound.CloseDoor();  // 문 닫기 소리 재생
         yield return new WaitForSeconds(0.8f);
 
         // ===== 2단계: 맵 전환 =====
@@ -103,6 +108,7 @@ public class MoveDoor : MonoBehaviour
         // 다음 맵의 문 열기
         Animator nextDoorAnimator = nextDoorExitPoint.GetComponentInChildren<Animator>();
         nextDoorAnimator.SetTrigger("Open");
+        doorSound.OpenDoor();  // 문 열기 소리 재생
         yield return new WaitForSeconds(0.5f);  // 문이 절반 정도 열릴 때까지 대기
         
         // 플레이어 렌더러 다시 활성화
@@ -115,6 +121,7 @@ public class MoveDoor : MonoBehaviour
 
         // 다음 맵의 문 닫기
         nextDoorAnimator.SetTrigger("lockdoor");
+        doorSound.CloseDoor();  // 문 닫기 소리 재생
         yield return new WaitForSeconds(0.8f);
         
         // ===== 4단계: 정리 및 완료 =====
