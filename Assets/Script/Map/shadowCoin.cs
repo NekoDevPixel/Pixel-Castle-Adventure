@@ -3,48 +3,26 @@ using UnityEngine;
 
 public class shadowCoin : MonoBehaviour
 {
-    public GameObject[] hidensize = new GameObject[3];
-    public GameObject[] hidenCoin = new GameObject[3];
+    public GameObject hidenCoin;
 
     private bool isTag = false;
-    private int Tag_p = 0;
 
-    void Awake()
+    void Start()
     {
-        for (int i = 0; i < hidensize.Length; i++)
-        {
-            hidenCoin[i].SetActive(false);
-        }
+        hidenCoin.SetActive(false);
     }
 
     void Update()
     {
         CheckTag();
-        Appearance();
-    }
-
-    void Appearance()
-    {
-        if(Tag_p == 1)
-        {
-            hidenCoin[0].SetActive(true);
-        }
-        if (Tag_p == 2)
-        {
-            hidenCoin[1].SetActive(true);
-        }
-        if (Tag_p == 3)
-        {
-            hidenCoin[2].SetActive(true);
-        }
     }
 
     void CheckTag()
     {
-        if (isTag == true)
+        if(isTag)
         {
-            Tag_p += 1;
-            isTag = false;
+            hidenCoin.SetActive(true);
+            isTag = false; // 태그가 감지되면 true로 설정
         }
     }   
 
@@ -52,8 +30,8 @@ public class shadowCoin : MonoBehaviour
     {
         if(collision.CompareTag("Enemy"))
         {
+            Debug.Log("충돌 감지: " + collision.gameObject.name + ", 태그: " + collision.tag);
             isTag = true;
         }
     }
-
 }

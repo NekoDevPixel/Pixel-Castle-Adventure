@@ -5,7 +5,7 @@ using UnityEngine.AI;
 public class Monster : MonoBehaviour
 {
     public Transform player;
-    public float moveSpeed = 3.0f;
+    public float moveSpeed = 2.2f;
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
     private bool playerInRange = false;
@@ -24,7 +24,7 @@ public class Monster : MonoBehaviour
             
         // 감지용 콜라이더 추가 (코드로 추가하거나 Unity 에디터에서 추가)
         CircleCollider2D detectionCollider = gameObject.AddComponent<CircleCollider2D>();
-        detectionCollider.radius = 3.5f;
+        detectionCollider.radius = 2f;
         detectionCollider.isTrigger = true;
     }
     
@@ -50,7 +50,7 @@ public class Monster : MonoBehaviour
                 spriteRenderer.flipX = false;
             
             // X축으로만 이동 (Y축 이동은 0으로 설정)
-            rb.linearVelocity = new Vector2(directionSign * moveSpeed, 0f);
+            rb.linearVelocity = new Vector2(directionSign * moveSpeed, rb.linearVelocity.y);
         }
         else
         {
