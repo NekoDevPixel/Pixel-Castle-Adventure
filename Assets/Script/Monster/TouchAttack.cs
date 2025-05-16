@@ -10,12 +10,18 @@ public class TouchAttack : MonoBehaviour
     private Monster monster;
     public Rigidbody2D playerRb;
 
+    [Header("넉백 사운드")]
+    public AudioClip knockbackSound;
+    private AudioSource audioSource;
+
     private bool isattack = false;
+    
 
     void Awake()
     {
         gameManager = FindFirstObjectByType<GameManager>();
         monster = GetComponent<Monster>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     void FixedUpdate()
@@ -23,6 +29,7 @@ public class TouchAttack : MonoBehaviour
         if (isattack == true)
         {
             touchAttack();
+            
             isattack = false;
         }
     }
@@ -41,7 +48,7 @@ public class TouchAttack : MonoBehaviour
                 // y 성분을 줄이고 x 성분 강조
                 direction = new Vector2(Mathf.Sign(direction.x), 0.3f);
                 direction.Normalize();
-
+                
                 playerRb.linearVelocity = Vector2.zero;
                 playerRb.AddForce(direction * knockbackForce, ForceMode2D.Impulse);
                 StartCoroutine(hitPlayer());
@@ -56,6 +63,7 @@ public class TouchAttack : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            audioSource.PlayOneShot(knockbackSound);
             isattack = true;   
         }
     }  
@@ -63,6 +71,7 @@ public class TouchAttack : MonoBehaviour
     private IEnumerator hitPlayer()
     {
         playeranim.SetTrigger("hit");
+        
         gameManager.Heart -= 1; // 플레이어의 체력 감소
         yield return new WaitForSeconds(playeranim.GetCurrentAnimatorStateInfo(0).length);
         playeranim.SetTrigger("Idle");

@@ -31,6 +31,8 @@ public class MoveDoor : MonoBehaviour
     private bool isPlayerInTrigger = false;   // 플레이어가 트리거 영역 안에 있는지 여부
     private bool isProcessing = false;        // 맵 이동 처리 중인지 여부
 
+    private FadeCanvas fadeCanvas; // 페이드 캔버스
+
     /// <summary>
     /// 초기화
     /// </summary>
@@ -42,6 +44,7 @@ public class MoveDoor : MonoBehaviour
         doorSound = GetComponent<DoorSound>();
         // 현재 문의 애니메이터 컴포넌트 가져오기
         doorAnimator = GetComponent<Animator>();
+        fadeCanvas = FindFirstObjectByType<FadeCanvas>();
     }
 
     /// <summary>
@@ -91,6 +94,10 @@ public class MoveDoor : MonoBehaviour
         doorSound.CloseDoor();  // 문 닫기 소리 재생
         yield return new WaitForSeconds(0.8f);
 
+        bool fadeOutComplete = false;
+        fadeCanvas.FadeOut(() => fadeOutComplete = true);
+        yield return new WaitUntil(() => fadeOutComplete);
+
         // ===== 2단계: 맵 전환 =====
         // 현재 맵 비활성화 및 다음 맵 활성화
         currentMap.SetActive(false);
@@ -101,6 +108,9 @@ public class MoveDoor : MonoBehaviour
 
         // 카메라 위치 조정
         AdjustCamera();
+        bool fadeInComplete = false;
+        fadeCanvas.FadeIn(() => fadeInComplete = true);
+        yield return new WaitUntil(() => fadeInComplete);
 
         // ===== 3단계: 다음 맵에서 플레이어 퇴장 =====
         yield return new WaitForSeconds(0.3f);  // 맵 전환 후 잠시 대기
