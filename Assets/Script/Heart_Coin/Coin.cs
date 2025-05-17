@@ -2,21 +2,22 @@ using UnityEngine;
 
 public class Coin : MonoBehaviour
 {
-    private GameManager gameManager; // GameManager 스크립트의 인스턴스
+    private GameManager gameManager;
+    private ItemSound itemSound;
 
     void Start()
     {
-        // GameManager 스크립트의 인스턴스를 찾습니다.
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        itemSound = GetComponent<ItemSound>();
     }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Player"))
+        if (collision.CompareTag("Player"))
         {
-            
-            gameManager.Coin += 1; // 코인 수를 증가시킵니다.
-            Destroy(this.gameObject);
+            gameManager.Coin += 1;
+            itemSound.PlaySound(); // 코인 사운드 재생
+            Destroy(gameObject);   // 바로 삭제해도 소리는 남음
         }
     }
 }
