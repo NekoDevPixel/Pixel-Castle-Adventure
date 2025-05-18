@@ -14,10 +14,16 @@ public class NextS : MonoBehaviour
     {
 
     }
-    
+
     public void OnClickStart()
     {
         // Load the next scene
         SceneManager.LoadScene("InGame");
+    }
+    
+    public void OnClickExit()
+    {
+        // Exit the application
+        Application.Quit();
     }
 }
