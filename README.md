@@ -31,6 +31,13 @@
 
 ---
 
+## 🎮 지금 플레이하기
+
+완성된 **Pixel Castle Adventure**를 지금 바로 브라우저에서 플레이해보세요!  
+👉 [게임 플레이하러 가기](https://play.unity.com/en/games/d065d92d-699c-4235-b8db-600a5359a29b/pixel-castle-adventure)
+
+---
+
 ## 📦 사용한 에셋
 
 - [Kings and Pigs by Pixel Frog](https://pixelfrog-assets.itch.io/kings-and-pigs)  
@@ -45,3 +52,5 @@
 ## 🎬 게임플레이 미리보기
 
 ![Diamond Run Gameplay](./explay/Ex_play.gif)
+
+
