@@ -49,6 +49,13 @@
 - [DOTween Pro (Unity Asset Store)](https://assetstore.unity.com/packages/tools/visual-scripting/dotween-pro-32416?locale=ko-KR)  
   (애니메이션 및 트윈 효과)
 
+- [Hints Stars Points & Rewards Sound Effects - Lite Pack(Unity Asset Store)](https://assetstore.unity.com/packages/audio/sound-fx/hints-stars-points-rewards-sound-effects-lite-pack-295538)
+  <br>(사운드)
+- [8Bit Music - 062022 (Unity Asset Store)](https://assetstore.unity.com/packages/audio/music/8bit-music-062022-225623)
+  <br>(사운드)
+- [Footsteps - Essentials (Unity Asset Store)](https://assetstore.unity.com/packages/audio/sound-fx/foley/footsteps-essentials-189879)
+  <br>(사운드)
+
 ## 🎬 게임플레이 미리보기
 
 ![Diamond Run Gameplay](./explay/Ex_play.gif)
